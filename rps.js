@@ -6,26 +6,26 @@ function game() {
     if (!isNaN(numOfRounds)) {
         for (let i = 0; i < numOfRounds; i++) {
             console.log(`This is Round ${i+1}... begin!`);
-            // singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay());
-            singleRound(); 
+            singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay());
+            // singleRound(); 
             if (result.contains('You win')) {
                  playerTotalScore += 1; 
             } else if (result.contains('You lose')) {
                 playerTotalScore -= 1;
                 compTotalScore += 1; 
             } else {
-                // singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay()); 
-                singleRound(); 
+                singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay()); 
+                // singleRound(); 
             }
         }
     } 
-    // return function() { return result; }
+    return singleRound(); 
     console.log(`After ${numOfRounds} rounds, the winner is...`);
     console.log("winner!")
 }
 
 
-var singleRound = function (playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerDecision) {
+function singleRound(playerDecision, computerDecision) {
     // let result;
     if (playerDecision.toLowerCase() === 'rock') {
         switch (computerDecision) {
@@ -59,8 +59,8 @@ var singleRound = function (playerDecision = prompt('Choose: Rock, Paper or Scis
         return result;  
     } else {
         alert(`Your selection of ${playerDecision} is not valid. Please try again. `); 
-        // singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay()); 
-        singleRound(), computerPlay(); 
+        singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay()); 
+        // singleRound(), computerPlay(); 
     }
     // return 
 }
