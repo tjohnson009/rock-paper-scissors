@@ -1,5 +1,5 @@
 function game() { 
-    let result; 
+    let result = ``; 
     let playerTotalScore = 0; 
     let compTotalScore = 0;  
     let numOfRounds = parseInt(prompt(`How many rounds do you want to play?`)); 
@@ -8,61 +8,61 @@ function game() {
             console.log(`This is Round ${i+1}... begin!`);
             singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay());
             // singleRound(); 
-            if (result.contains('You win')) {
+            if (result.includes('You win')) {
                  playerTotalScore += 1; 
-            } else if (result.contains('You lose')) {
+            } else if (result.includes('You lose')) {
                 playerTotalScore -= 1;
                 compTotalScore += 1; 
             } else {
                 singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay()); 
-                // singleRound(); 
+                // singleRound(); // if we convert to fx expression
             }
         }
     } 
-    return singleRound(); 
-    console.log(`After ${numOfRounds} rounds, the winner is...`);
-    console.log("winner!")
-}
-
-
-function singleRound(playerDecision, computerDecision) {
-    // let result;
-    if (playerDecision.toLowerCase() === 'rock') {
-        switch (computerDecision) {
-            case 'Paper': result = `You lose, ${computerDecision} beats ${playerDecision}. You lost one point!`;
-            break; 
-            case 'Scissors': result = `You win, ${playerDecision} beats ${computerDecision}. You earned one point!`;
-            break; 
-            default: result = `Choose again, ${computerDecision} matches ${playerDecision}. You earned no points...yet!`;
-            break; 
+    function singleRound(playerDecision, computerDecision)
+    {
+        // let result;
+        if (playerDecision.toLowerCase() === 'rock') {
+            switch (computerDecision) {
+                case 'Paper': result = `You lose, ${computerDecision} beats ${playerDecision}. You lost one point!`;
+                    break;
+                case 'Scissors': result = `You win, ${playerDecision} beats ${computerDecision}. You earned one point!`;
+                    break;
+                default: result = `Choose again, ${computerDecision} matches ${playerDecision}. You earned no points...yet!`;
+                    break;
+            }
+            return result;
+        } else if (playerDecision.toLowerCase() === 'paper') {
+            switch (computerDecision) {
+                case 'Rock': result = `You win, ${playerDecision} beats ${computerDecision}. You earned one point!`;
+                    break;
+                case 'Scissors': result = `You lose, ${computerDecision} beats ${playerDecision}. You lost one point!`;
+                    break;
+                default: result = `Choose again, ${computerDecision} matches ${playerDecision}. You earned no points...yet!`;
+                    break;
+            }
+            return result;
+        } else if (playerDecision.toLowerCase() === 'scissors') {
+            switch (computerDecision) {
+                case 'Paper': result = `You win, ${playerDecision} beats ${computerDecision}. You earned one point!`;
+                    break;
+                case 'Rock': result = `You lose, ${computerDecision} beats ${playerDecision}. You lost one point!`;
+                    break;
+                default: result = `Choose again, ${computerDecision} matches ${playerDecision}. You earned no points...yet!`;
+                    break;
+            };
+            return result;
+        } else {
+            alert(`Your selection of ${playerDecision} is not valid. Please try again. `);
+            singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay());
+            // singleRound(), computerPlay(); 
         }
-    return result; 
-    } else if (playerDecision.toLowerCase() === 'paper') {
-        switch (computerDecision) {
-            case 'Rock': result = `You win, ${playerDecision} beats ${computerDecision}. You earned one point!`;
-            break; 
-            case 'Scissors': result = `You lose, ${computerDecision} beats ${playerDecision}. You lost one point!`;
-            break; 
-            default: result = `Choose again, ${computerDecision} matches ${playerDecision}. You earned no points...yet!`;
-            break;
-        } 
-        return result;  
-    } else if (playerDecision.toLowerCase() === 'scissors') {
-        switch (computerDecision) {
-            case 'Paper': result = `You win, ${playerDecision} beats ${computerDecision}. You earned one point!`;
-            break; 
-            case 'Rock': result = `You lose, ${computerDecision} beats ${playerDecision}. You lost one point!`;
-            break; 
-            default: result = `Choose again, ${computerDecision} matches ${playerDecision}. You earned no points...yet!`;
-            break;  
-        };
-        return result;  
-    } else {
-        alert(`Your selection of ${playerDecision} is not valid. Please try again. `); 
-        singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay()); 
-        // singleRound(), computerPlay(); 
-    }
-    // return 
+        // return 
+    };
+    return singleRound(playerDecision = prompt('Choose: Rock, Paper or Scissors'), computerPlay()); 
+ 
+    // console.log(`After ${numOfRounds} rounds, the winner is...`);
+    // console.log("winner!")
 }
 
 function computerPlay() {
@@ -73,4 +73,5 @@ function computerPlay() {
     return decision; 
 }
 
-game(); 
+let play = game(); 
+play();  
