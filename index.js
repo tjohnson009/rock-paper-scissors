@@ -1,23 +1,10 @@
 //create a startGame function
 function newGame() {
     // get input from user of how many rounds to play (max of 9)
-    let numOfROunds = () => {
-        // parse the input
-        let rounds = parseInt(prompt(`How many rounds would you like to play?`)); 
-        // Max rounds set to 9
-        if (rounds > 9) {
-            console.alert(`Max number of rounds is 5.`); 
-            rounds = 9; 
-        // Min rounds set to 3
-        } else if (rounds < 3) {
-            console.alert(`Minimum number of rounds is 3`);
-            rounds = 3; 
-        }
-        return rounds; 
-    }; 
+    const rounds = getNumOfRounds(); 
     // pass parsed input to main game function
     // intialize a startRound or playRound function with parsed input
-
+    
     // get round choice from the user
     // get round choice from the computer (random)
     // determine winner of the round
@@ -29,6 +16,34 @@ function newGame() {
     function playAgain() {
 
     }
+
+    function getNumOfRounds() {
+        // parse the input
+        let rounds = parseInt(prompt(`How many rounds would you like to play?`)); 
+        // check if input is a number
+    if (isNaN(rounds)) {
+            console.info(`Please enter a number.`); 
+            getNumOfRounds();
+            //return; // do I need this here?
+        };
+        // set max number of rounds to 9
+     if (rounds > 9) {
+            console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
+            rounds = 9; 
+        };       
+        // Min rounds set to 3
+    if (rounds < 3) {
+            console.info(`Minimum number of rounds is 3. Setting number of rounds to 3.`);
+            rounds = 3; 
+        }; 
+        // if rounds is even, increment by 1 to force a winner
+        if (rounds % 2 == 0 && rounds < 9 && rounds > 3) {
+            rounds = rounds + 1; 
+            console.log(`Added one round to force a winner.`)
+        }
+        console.log(`Starting game of ${rounds} rounds.`); 
+        return rounds; 
+    }; 
 
     function getComputerChoice() {
         // create an array of string options for RPS
@@ -76,3 +91,4 @@ function newGame() {
     }
 
     // playRound(); // fixed issue with adding nonexistent parameters to this function; line 34 has no params
+    newGame();
