@@ -68,4 +68,4 @@ function newGame() {
     // newGame(); 
     // console.log(getComputerChoice()); 
     // getPlayerChoice(); 
-    playRound(); 
+    playRound(); // fixed issue with adding nonexistent parameters to this function; line 34 has no params
