@@ -32,16 +32,40 @@ function newGame() {
 
     function playRound(playerChoice, computerChoice) {
         // get Player choice
-        playerChoice = prompt(`Rock, Paper or Scissors?`).toLowerCase(); 
+        // playerChoice = getPlayerChoice(); 
         // get computer choice 
-        computerChoice = getComputerChoice(); 
-        // determine winner
-        getRoundWinner(playerChoice, computerChoice); 
-        // return winner
+        // computerChoice = getComputerChoice(); 
+        // get winner 
+        getRoundWinner(getPlayerChoice(), getComputerChoice()); 
+    
         // update score
     }
-    function getRoundWinner(player, computer) {
-        
+    
+    function getPlayerChoice() {
+        //intialize return value playerChoice
+        let playerChoice; 
+        //prompt user for a choice
+        let input = prompt(`Rock, Paper or Scissors?`).toLowerCase(); 
+        // set playerChoice or reprompt the user for a valid input
+        input === 'rock' ? playerChoice = 'rock' 
+        : input === 'paper' ? playerChoice = 'paper' 
+        : input === 'scissors' ? playerChoice = 'scissors' 
+        : `getPlayerChoice()`;
+        console.log(`Player choice confirmed.`)
+        return playerChoice; 
     }
-    newGame(); 
+
+    function getRoundWinner(player, computer) {
+        if (player === 'rock') {
+            computer === 'rock' ? `It's a tie` : 'paper' ? `Computer wins!` : `Player wins`; 
+            console.log('player chose rock'); 
+        } else if (player === 'paper') {
+
+        } else {
+
+        }; 
+    }
+    // newGame(); 
     // console.log(getComputerChoice()); 
+    // getPlayerChoice(); 
+    playRound(getPlayerChoice(), getComputerChoice()); 
