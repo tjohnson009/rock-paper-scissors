@@ -1,17 +1,22 @@
 //create a startGame function
 function game() {
+    let playerScore = 0;
+    let computerScore = 0;
     // get input from user of how many rounds to play (max of 9)
-    const rounds = getNumOfRounds(); // returns a number
+    let rounds = getNumOfRounds(); // returns a number
     // loop through for the number of rounds
     for (let i = 0; i < rounds; i++) { 
+        // announce the round #
         console.log(`Now starting Round ${i+1}.`); 
         // plays one whole round of rock paper scissors
-        playRound(); // returns something
-
+        let currentRoundResult = playRound(rounds); // returns string at the moment
+        //updates the score
+        updateScore(currentRoundResult, playerScore, computerScore); // perhaps update score from within the round?
     }
-    // print that to the console
-    // check if computer/user has won enough rounds to win the game (checkWin)
     // announce winner of the whole game
+    if (playerScore === rounds || computerScore === rounds) {
+        return playerScore === 9 ? 'Player' : `Computer` + ` is the winner!`; 
+    }
 }
 // prompt user to play again?
 function playAgain() {
@@ -46,8 +51,16 @@ function getNumOfRounds() {
     return rounds; 
 }; 
 
-function updateScore() {
-    
+function updateScore(roundResult, playerScore, computerScore) {
+    if (roundResult.includes('Player wins')) {
+        playerScore++; 
+        console.log(`Player: ${playerScore} - Computer: ${computerScore}`); 
+    } else if (roundResult.includes('Computer wins')) {
+        computerScore++;
+        console.log(`Player: ${playerScore} - Computer: ${computerScore}`); 
+    } else {
+        console.log(`No score change.`);
+    }
 }; 
 
 function getComputerChoice() {
@@ -60,15 +73,21 @@ function getComputerChoice() {
     return options[choice]; 
 }
 
-function playRound() {
-    let result = ``; 
+function playRound(rounds) { // returns a result string from the round
     // get Player choice
     // get computer choice 
     // get winner for console
+
     // getRoundWinner(getPlayerChoice(), getComputerChoice()); // only console.log option
-    console.log(getRoundWinner(getPlayerChoice(), getComputerChoice())); // return statement in getRoundWinner + console.log option
-        // update score
-        
+    let resultString = getRoundWinner(getPlayerChoice(), getComputerChoice()); // return statement in getRoundWinner + console.log option
+    if (resultString.includes('tie')) { // result of round is a tie
+        resultString = ''; 
+        forceWinner(rounds); 
+    } else {
+        console.log(resultString); // log result to the console
+        return resultString; 
+    }
+        return resultString
     }
     
     function getPlayerChoice() {
@@ -83,7 +102,7 @@ function playRound() {
         getPlayerChoice(); // call the function again to ensure that selection is valid
     }; 
     
-    function getRoundWinner(player, computer) {
+    function getRoundWinner(player, computer) { // returns a string
         // determine winner of the round
         if (player === 'rock') {
             console.log('Player chooses rock.'); 
@@ -99,6 +118,14 @@ function playRound() {
             return computer === 'rock' ? `Computer wins. Rock beats scissors.` : computer === 'paper' ? `Player wins! Scissors beats paper.` : `It's a tie.`;  
         }; 
     }
+
+    function forceWinner(rounds) { // receives the current round # from the game function and plays the round again
+        console.log(`We must have a winner...`); 
+        // resets round number
+        rounds = rounds - 1; 
+        //plays round again
+        playRound(rounds); 
+    }; 
 
     // playRound(); // fixed issue with adding nonexistent parameters to this function; line 34 has no params
     game();
