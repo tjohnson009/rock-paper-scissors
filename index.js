@@ -12,14 +12,16 @@ function game() {
         console.log(`Now starting Round ${i+1}.`); 
 
         // plays one whole round of rock paper scissors
-       let result = playRound(rounds); // returns string at the moment
+       let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
 
-        //updates the score
-       updateScore(result, playerScore, computerScore); // perhaps update score from within the round function?
+        //updates the score AND returns the values of the scores
+       [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
     }
     // announce winner of the whole game based on point values check
-    if (playerScore === rounds || computerScore === rounds) {
-        return playerScore === 9 ? 'Player' : `Computer` + ` is the winner!`; 
+    if (playerScore > computerScore) {
+        console.log(`Player is the winner with a final score of ${playerScore} wins out of ${rounds} rounds!`);  
+    } else if (computerScore > playerScore) {
+        console.log(`Computer is the winner with a final score of ${computerScore} wins out of ${rounds} rounds!`)
     }
 }
 // prompt user to play again?
@@ -54,18 +56,16 @@ function getNumOfRounds() {
     return rounds; 
 }; 
 
-function updateScore(roundResult, pScore, cScore) { // (result = string, number, number)
+function updateScore(roundResult, playerScore, computerScore) { // (result = string, number, number)
     if (roundResult.includes('Player wins')) {
-        pScore++; 
-        console.log(`Player: ${pScore} - Computer: ${cScore}`);
-        // return pScore, cScore; 
+        playerScore++; 
+        console.log(`Player: ${playerScore} - Computer: ${computerScore}`);
+        return [playerScore, computerScore]; 
     } else if (roundResult.includes('Computer wins')) {
-        cScore++;
-        console.log(`Player: ${pScore} - Computer: ${cScore}`); 
-        // return pScore, cScore; 
-    } else {
-        console.log(`No score change.`);
-    }
+        computerScore++;
+        console.log(`Player: ${playerScore} - Computer: ${computerScore}`); 
+        return [playerScore, computerScore]; 
+    } // no else case because we force a winner
 }; 
 
 function getComputerChoice() {
@@ -81,31 +81,28 @@ function getComputerChoice() {
 function playRound(rounds) { // returns a result string from the round
     // get Player choice
     // get computer choice 
-    // get winner for console
 
-    // getRoundWinner(getPlayerChoice(), getComputerChoice()); // only console.log option
-    let resultString = getRoundWinner(getPlayerChoice(), getComputerChoice()); // return statement in getRoundWinner + console.log option
+    let resultString = getRoundWinner(getPlayerChoice(), getComputerChoice()); // returns a string which will be used to determine the winner
     if (resultString.includes('tie')) { // result of round is a tie
-        // resultString = ''; 
         return forceWinner(rounds); // calls playRound f(x)
     } else {
         console.log(resultString); // log result to the console
-        return resultString; 
+        return resultString; // saved to a resault variable in the game function
         }
     }
 
     function forceWinner(rounds) { // receives the current round # from the game function and plays the round again
         console.log(`We must have a winner...`); 
-        // resets round number
+        // resets round number for proper tracking
         rounds = rounds - 1; 
         //plays round again
         return playRound(rounds); 
     }; 
     
-    function getPlayerChoice() { // returns a string
+    function getPlayerChoice() { // returns a string of the users choice
         //prompt user for a choice
         let input = prompt(`Rock, Paper or Scissors?`).toLowerCase(); 
-        // set playerChoice or reprompt the user for a valid input - CONSIDER USING A PROPER IF STATEMENT HERE
+        // set playerChoice or reprompt the user for a valid input
         return input == 'rock' ? 'rock' : 
         input == 'paper' ? 'paper' :
         input == 'scissors' ? 'scissors' :
@@ -116,19 +113,14 @@ function playRound(rounds) { // returns a result string from the round
         // determine winner of the round
         if (player === 'rock') {
             console.log('Player chooses rock.'); 
-//CONSOLE.LOG return computer === 'rock' ? console.log(`It's a tie.`) : computer === 'paper' ? console.log(`Computer wins! Paper beats rock.`) : console.log(`Player wins! Rock beats scissors.`); 
             return computer === 'rock' ? `It's a tie.` : computer === 'paper' ? `Computer wins! Paper beats rock.` : `Player wins! Rock beats scissors.`; 
         } else if (player === 'paper') {
             console.log('Player chooses paper.'); 
-//log option  return computer === 'rock' ? console.log(`Player wins! Paper beats rock.`) : computer === 'paper' ? console.log(`It's a tie.`) : console.log(`Computer wins. Scissors beats paper.`); 
             return computer === 'rock' ? `Player wins! Paper beats rock.` : computer === 'paper' ? `It's a tie.` : `Computer wins. Scissors beats paper.`; 
-        } else { // player must have chosen scissors
+        } else { // player must have chosen scissors by process of elimination
             console.log('Player chooses scissors.');
-//log option return computer === 'rock' ? console.log(`Computer wins. Rock beats scissors.`) : computer === 'paper' ? console.log(`Player wins! Scissors beats paper.`) : console.log(`It's a tie.`);  
             return computer === 'rock' ? `Computer wins. Rock beats scissors.` : computer === 'paper' ? `Player wins! Scissors beats paper.` : `It's a tie.`;  
         }; 
     }
-
-
-    // playRound(); // fixed issue with adding nonexistent parameters to this function; line 34 has no params
+    
     game();
