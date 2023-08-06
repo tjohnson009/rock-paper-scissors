@@ -2,18 +2,22 @@
 function game() {
     let playerScore = 0;
     let computerScore = 0;
+
     // get input from user of how many rounds to play (max of 9)
     let rounds = getNumOfRounds(); // returns a number
-    // loop through for the number of rounds
+
+    // loop through playROund f(x) for the number of rounds
     for (let i = 0; i < rounds; i++) { 
         // announce the round #
         console.log(`Now starting Round ${i+1}.`); 
+
         // plays one whole round of rock paper scissors
-        let currentRoundResult = playRound(rounds); // returns string at the moment
+       let result = playRound(rounds); // returns string at the moment
+
         //updates the score
-        updateScore(currentRoundResult, playerScore, computerScore); // perhaps update score from within the round?
+       updateScore(result, playerScore, computerScore); // perhaps update score from within the round function?
     }
-    // announce winner of the whole game
+    // announce winner of the whole game based on point values check
     if (playerScore === rounds || computerScore === rounds) {
         return playerScore === 9 ? 'Player' : `Computer` + ` is the winner!`; 
     }
@@ -29,8 +33,7 @@ function getNumOfRounds() {
     // check if input is a number
     if (isNaN(rounds)) {
         console.info(`Please enter a number.`); 
-        getNumOfRounds();
-        //return; // do I need this here?
+        return getNumOfRounds(); // added return statement to not load the call stack and avoid having erroneous logs to the console with NaN
     };
     // set max number of rounds to 9
     if (rounds > 9) {
@@ -51,13 +54,15 @@ function getNumOfRounds() {
     return rounds; 
 }; 
 
-function updateScore(roundResult, playerScore, computerScore) {
+function updateScore(roundResult, pScore, cScore) { // (result = string, number, number)
     if (roundResult.includes('Player wins')) {
-        playerScore++; 
-        console.log(`Player: ${playerScore} - Computer: ${computerScore}`); 
+        pScore++; 
+        console.log(`Player: ${pScore} - Computer: ${cScore}`);
+        // return pScore, cScore; 
     } else if (roundResult.includes('Computer wins')) {
-        computerScore++;
-        console.log(`Player: ${playerScore} - Computer: ${computerScore}`); 
+        cScore++;
+        console.log(`Player: ${pScore} - Computer: ${cScore}`); 
+        // return pScore, cScore; 
     } else {
         console.log(`No score change.`);
     }
@@ -81,24 +86,29 @@ function playRound(rounds) { // returns a result string from the round
     // getRoundWinner(getPlayerChoice(), getComputerChoice()); // only console.log option
     let resultString = getRoundWinner(getPlayerChoice(), getComputerChoice()); // return statement in getRoundWinner + console.log option
     if (resultString.includes('tie')) { // result of round is a tie
-        resultString = ''; 
-        forceWinner(rounds); 
+        // resultString = ''; 
+        return forceWinner(rounds); // calls playRound f(x)
     } else {
         console.log(resultString); // log result to the console
         return resultString; 
+        }
     }
-        return resultString
-    }
+
+    function forceWinner(rounds) { // receives the current round # from the game function and plays the round again
+        console.log(`We must have a winner...`); 
+        // resets round number
+        rounds = rounds - 1; 
+        //plays round again
+        return playRound(rounds); 
+    }; 
     
-    function getPlayerChoice() {
-        //intialize return value playerChoice
-        let playerChoice; 
+    function getPlayerChoice() { // returns a string
         //prompt user for a choice
         let input = prompt(`Rock, Paper or Scissors?`).toLowerCase(); 
-        // set playerChoice or reprompt the user for a valid input - PERHAPS USE A PROPER IF STATEMENT HERE
-        return input == 'rock' ? playerChoice = 'rock' : 
-        input == 'paper' ? playerChoice = 'paper' :
-        input == 'scissors' ? playerChoice = 'scissors' :
+        // set playerChoice or reprompt the user for a valid input - CONSIDER USING A PROPER IF STATEMENT HERE
+        return input == 'rock' ? 'rock' : 
+        input == 'paper' ? 'paper' :
+        input == 'scissors' ? 'scissors' :
         getPlayerChoice(); // call the function again to ensure that selection is valid
     }; 
     
@@ -119,13 +129,6 @@ function playRound(rounds) { // returns a result string from the round
         }; 
     }
 
-    function forceWinner(rounds) { // receives the current round # from the game function and plays the round again
-        console.log(`We must have a winner...`); 
-        // resets round number
-        rounds = rounds - 1; 
-        //plays round again
-        playRound(rounds); 
-    }; 
 
     // playRound(); // fixed issue with adding nonexistent parameters to this function; line 34 has no params
     game();
