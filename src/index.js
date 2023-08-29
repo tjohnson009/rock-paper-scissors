@@ -31,16 +31,19 @@ function playAgain() {
 
 function getNumOfRounds() {
     // create the container that will ask the user for input on the num of rounds
-    const container = document.createElement('div'); 
-    container.className = 'container'; 
-    document.body.style.backgroundColor = 'blue';  
+    const container2 = document.createElement('div'); 
+    container2.setAttribute('id', 'container2'); 
+    container2.classList.add("bg-red-400", "min-h-screen"); 
+    document.body.appendChild(container2); 
+
+    // const container = document.querySelector('.container'); 
+    // container.classList.add("bg-red-400", "min-h-full"); 
+    // container.style.height = '500px'; 
 
     // create container text div and buttons div
-    let roundsTextDiv = document.createElement('div'); 
-    let roundsButtonsDiv = document.createElement('div'); 
 
     // style and create content for text and buttons divs
-    roundsTextDiv.classList.add('flex-1', 'bg-red-400'); 
+
 
     // check if input is a number
     if (isNaN(rounds)) {
@@ -135,4 +138,4 @@ function playRound(rounds) { // returns a result string from the round
         }; 
     }
     
-    // game();
+    game();
