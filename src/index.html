@@ -7,8 +7,49 @@
     <link href="../dist/style.css" rel="stylesheet">
     <title>Rock, Paper, Scissors</title>
 </head>
-<body>
-    <div class="container"></div>
+<body class="flex flex-col items-center justify-center bg-blue-300 h-screen gap-6">
+    <div class="title flex justify-center"><h1>Rock, Paper, Scissors</h1></div>  
+    <div class="roundsDivContainer flex flex-col bg-slate-500 items-center rounded-md gap-9 p-7 w-2/5">
+        <div class="roundsDivText border-spacing-0 border-neutral-100 bg-neutral-300 border rounded-md p-8">
+            <p>How many rounds do you want to play?</p>
+        </div>
+        <div class="roundsDivInputs flex border border-spacing-0 rounded-md w-2/5">
+            <input class="w-full" type="number" name="rounds" id="numRounds" placeholder="3">
+        </div>
+        <div class="startButton bg-green-700 border border-green-600 border-spacing-0 rounded-md w-1/5 flex justify-center">
+            <button type="text" value="Start" name="startButton" id="startButton">Start</button>
+        </div>
+    </div>
+    <div class="gameplay" hidden>
+        <div class="scoreboard">
+                <div class="playerScorebox">
+                    <p class="playerTitle">Player:</p>
+                    <p class="playerPoints"></p>
+                </div>
+                <div class="infoBox">
+                    <div class="roundNumber">
+
+                    </div>
+                    <div class="roundsIcons">
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="roundResult">
+                        <p class="resultText"></p>
+                    </div>
+                </div>
+                <div class="computerScorebox">
+                    <p class="computerTitle">Computer:</p>
+                    <p class="computerpoints"></p>
+                </div>
+        </div>
+        <div class="buttons">
+
+        </div>
+        <div class="newGameDiv">
+            <button type="text" value="New Game" name="newGameButton" id="newGameButton">New Game</button>
+        </div>
+    </div>
 
     <script src="index.js"></script>
 </body>

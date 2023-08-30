@@ -1,73 +1,58 @@
 //create a startGame function
-function game() {
+function newGame() {
     let playerScore = 0;
     let computerScore = 0;
+    
+const DOM_INPUTS = {
+    startButton: document.querySelector('#startButton'), 
+    roundsInput: document.querySelector('#numRounds'), 
+}
 
     // get input from user of how many rounds to play (max of 9)
     let rounds = getNumOfRounds(); // returns a number
+    DOM_INPUTS.startButton.addEventListener('click', (e) => {
+        startPlay(rounds); 
+    })
 
     // loop through playROund f(x) for the number of rounds
-    for (let i = 0; i < rounds; i++) { 
-        // announce the round #
-        console.log(`Now starting Round ${i+1}.`); 
+    // for (let i = 0; i < rounds; i++) { 
+    //     // announce the round #
+    //     // console.log(`Now starting Round ${i+1}.`); 
 
-        // plays one whole round of rock paper scissors
-       let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
+    //     // plays one whole round of rock paper scissors
+    //    let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
 
-        //updates the score AND returns the values of the scores
-       [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
-    }
+    //     //updates the score AND returns the values of the scores
+    //    [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
+    // }
     // announce winner of the whole game based on point values check
-    if (playerScore > computerScore) {
-        console.log(`Player is the winner with a final score of ${playerScore} wins out of ${rounds} rounds!`);  
-    } else if (computerScore > playerScore) {
-        console.log(`Computer is the winner with a final score of ${computerScore} wins out of ${rounds} rounds!`)
-    }
-}
-// prompt user to play again?
-function playAgain() {
-    
+    // if (playerScore > computerScore) {
+    //     console.log(`Player is the winner with a final score of ${playerScore} wins out of ${rounds} rounds!`);  
+    // } else if (computerScore > playerScore) {
+    //     console.log(`Computer is the winner with a final score of ${computerScore} wins out of ${rounds} rounds!`)
+    // }
 }
 
 function getNumOfRounds() {
-    // create the container that will ask the user for input on the num of rounds
-    const container2 = document.createElement('div'); 
-    container2.setAttribute('id', 'container2'); 
-    container2.classList.add("bg-red-400", "min-h-screen"); 
-    document.body.appendChild(container2); 
-
-    // const container = document.querySelector('.container'); 
-    // container.classList.add("bg-red-400", "min-h-full"); 
-    // container.style.height = '500px'; 
-
-    // create container text div and buttons div
-
-    // style and create content for text and buttons divs
-
-
-    // check if input is a number
-    if (isNaN(rounds)) {
-        console.info(`Please enter a number.`); 
-        return getNumOfRounds(); // added return statement to not load the call stack and avoid having erroneous logs to the console with NaN
-    };
-    // set max number of rounds to 9
-    if (rounds > 9) {
-        console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
-        rounds = 9; 
-    };     
-      
-    // Min rounds set to 3
-    if (rounds < 3) {
-        console.info(`Minimum number of rounds is 3. Setting number of rounds to 3.`);
-        rounds = 3; 
-    }; 
-
-    // if rounds is even, increment by 1 to force a winner
-    if (rounds % 2 == 0 && rounds < 9 && rounds > 3) {
-        rounds = rounds + 1; 
-        console.log(`Added one round to force a winner.`)
-    }
-    console.log(`Starting game of ${rounds} rounds.`); 
+    let rounds = 1; 
+    // get the rounds input from the HTML element
+    const roundsInput = document.querySelector('#numRounds'); 
+    // add event listener to rounds input on change
+    roundsInput.addEventListener('change', (e) => {
+        rounds = e.target.value; 
+        // sets min number of rounds to 1 and upodates input
+        if (rounds < 1) {
+            console.info(`Minimum number of rounds is 1. Setting number of rounds to 1.`);
+            rounds = 1; 
+        }; 
+        // sets max number of rounds to 9 and updates input
+        if (rounds > 9) {
+            console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
+            rounds = 9; 
+        };  
+        roundsInput.value = rounds; 
+        console.log(rounds); 
+    })
     return rounds; 
 }; 
 
@@ -116,7 +101,7 @@ function playRound(rounds) { // returns a result string from the round
     
     function getPlayerChoice() { // returns a string of the users choice
         //prompt user for a choice
-        let input = prompt(`Rock, Paper or Scissors?`).toLowerCase(); 
+        // let input = prompt(`Rock, Paper or Scissors?`).toLowerCase(); 
         // set playerChoice or reprompt the user for a valid input
         return input == 'rock' ? 'rock' : 
         input == 'paper' ? 'paper' :
@@ -137,5 +122,16 @@ function playRound(rounds) { // returns a result string from the round
             return computer === 'rock' ? `Computer wins. Rock beats scissors.` : computer === 'paper' ? `Player wins! Scissors beats paper.` : `It's a tie.`;  
         }; 
     }
+
+    function startPlay(rounds) {
+       // if rounds is even, increment by 1 to force a winner
+        if (rounds % 2 == 0 && rounds < 9 && rounds > 1) {
+            console.log(rounds); 
+            rounds++; 
+            console.log(`Added one round to force a winner.`); 
+            console.log('Starting play now'); 
+            // roundsInput.value = rounds; 
+    }
+}
     
-    game();
+    newGame();
