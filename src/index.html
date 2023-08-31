@@ -7,7 +7,7 @@
     <link href="../dist/style.css" rel="stylesheet">
     <title>Rock, Paper, Scissors</title>
 </head>
-<body class="flex flex-col items-center justify-center bg-blue-300 h-screen gap-6">
+<body class="flex flex-col items-center justify-center bg-blue-300 h-screen gap-6 my-3">
     <div class="title flex justify-center"><h1>Rock, Paper, Scissors</h1></div>  
     <div class="roundsDivContainer flex flex-col bg-slate-500 items-center rounded-md gap-9 p-7">
         <div class="roundsDivText border-spacing-0 border-neutral-100 bg-neutral-300 border rounded-md p-8">
@@ -20,35 +20,35 @@
             <button type="text" value="Start" name="startButton" id="startButton">Start</button>
         </div>
     </div>
-    <div class="gameplay flex flex-col bg-slate-500 justify-center items-center rounded-md w-4/5 h-screen">
-        <div class="scoreboard flex border-spacing-0 border rounded-md w-3/4">
-                <div class="playerScorebox flex border border-spacing-0 rounded-md basis-2/6 flex-1">
+    <div class="gameplay flex flex-col bg-slate-500 justify-center items-center rounded-md w-4/5 h-5/6 ">
+        <div class="scoreboard flex border-spacing-0 border rounded-md w-3/4 h-2/6">
+                <div class="playerScorebox flex flex-col border justify-center items-center border-spacing-0 rounded-md basis-2/6 flex-1">
                     <p class="playerTitle">Player:</p>
-                    <p class="playerPoints"></p>
+                    <p class="playerPoints">0</p>
                 </div>
-                <div class="infoBox flex border border-spacing-0 rounded-md basis-2/6 flex-1">
-                    <div class="roundNumber">
-
+                <div class="infoBox flex flex-col justify-center items-center border border-spacing-0 rounded-md basis-2/6 flex-1">
+                    <div class="roundNumber border border-spacing-0">
+                        <p>Round</p>
                     </div>
-                    <div class="roundsIcons">
+                    <div class="roundsIcons flex">
                         <div>O</div>
                         <div>X</div>
                     </div>
                     <div class="roundResult">
-                        <p class="resultText"></p>
+                        <p class="resultText">Rock, Paper or Scissors?</p>
                     </div>
                 </div>
-                <div class="computerScorebox flex border border-spacing-0 rounded-md basis-2/6 flex-1">
+                <div class="computerScorebox flex flex-col justify-center items-center border border-spacing-0 rounded-md basis-2/6 flex-1">
                     <p class="computerTitle">Computer:</p>
-                    <p class="computerpoints"></p>
+                    <p class="computerpoints">0</p>
                 </div>
         </div>
-        <div class="buttons flex">
-            <div><button class="rock">Rock</button></div>
-            <div><button class="paper">Paper</button></div>
-            <div><button class="scissors">Scissors</button></div>
+        <div class="buttons flex border border-spacing-0 w-3/4 h-2/6 justify-evenly items-center">
+            <div><button class="rock border border-spacing-0 roundChoice" value="'rock">Rock</button></div>
+            <div><button class="paper border border-spacing-0 roundChoice" value="'paper">Paper</button></div>
+            <div><button class="scissors border border-spacing-0 roundChoice" value="'scissors">Scissors</button></div>
         </div>
-        <div class="newGameDiv">
+        <div class="newGameDiv flex border border-spacing-0 w-3/4 h-1/6 justify-center items-center">
             <button type="text" value="New Game" name="newGameButton" id="newGameButton">New Game</button>
         </div>
     </div>

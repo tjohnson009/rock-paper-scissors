@@ -13,6 +13,8 @@ function newGame() {
     DOM_INPUTS.startButton.addEventListener('click', (e) => {
         startPlay(rounds); 
     }); 
+
+    // get number opf rounds from user
     DOM_INPUTS.roundsInput.addEventListener('change', (e) => {
         rounds = e.target.value; 
         // sets min number of rounds to 1 and upodates input
@@ -26,20 +28,21 @@ function newGame() {
             rounds = 9; 
         };  
         DOM_INPUTS.roundsInput.value = rounds; 
-        console.log(`Rounds = ${rounds}`); 
+        return rounds; 
+        // console.log(`Rounds = ${rounds}`); 
     }); 
 
     // loop through playROund f(x) for the number of rounds
-    // for (let i = 0; i < rounds; i++) { 
-    //     // announce the round #
-    //     // console.log(`Now starting Round ${i+1}.`); 
+    for (let i = 0; i < rounds; i++) { 
+        // announce the round #
+        // console.log(`Now starting Round ${i+1}.`); 
 
-    //     // plays one whole round of rock paper scissors
-    //    let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
+        // plays one whole round of rock paper scissors
+       let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
 
-    //     //updates the score AND returns the values of the scores
-    //    [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
-    // }
+        //updates the score AND returns the values of the scores
+       [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
+    }
     // announce winner of the whole game based on point values check
     // if (playerScore > computerScore) {
     //     console.log(`Player is the winner with a final score of ${playerScore} wins out of ${rounds} rounds!`);  
@@ -78,6 +81,8 @@ function getComputerChoice() {
 
 function playRound(rounds) { // returns a result string from the round
     // get Player choice
+    let playerChoice = ''; 
+    let buttons = document.querySelectorAll('.roundChoice'); 
     // get computer choice 
 
     let resultString = getRoundWinner(getPlayerChoice(), getComputerChoice()); // returns a string which will be used to determine the winner
@@ -136,7 +141,7 @@ function playRound(rounds) { // returns a result string from the round
         // display the gameplay container
         const gameplayDiv = document.querySelector('.gameplay'); 
         gameplayDiv.classList.toggle('hidden'); 
-        console.log(rounds); 
+        console.log(`${rounds} rounds`); 
 }
     
     newGame();
