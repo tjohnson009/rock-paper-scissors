@@ -9,7 +9,7 @@
 </head>
 <body class="flex flex-col items-center justify-center bg-blue-300 h-screen gap-6">
     <div class="title flex justify-center"><h1>Rock, Paper, Scissors</h1></div>  
-    <div class="roundsDivContainer flex flex-col bg-slate-500 items-center rounded-md gap-9 p-7 w-2/5">
+    <div class="roundsDivContainer flex flex-col bg-slate-500 items-center rounded-md gap-9 p-7">
         <div class="roundsDivText border-spacing-0 border-neutral-100 bg-neutral-300 border rounded-md p-8">
             <p>How many rounds do you want to play?</p>
         </div>
@@ -20,31 +20,33 @@
             <button type="text" value="Start" name="startButton" id="startButton">Start</button>
         </div>
     </div>
-    <div class="gameplay" hidden>
-        <div class="scoreboard">
-                <div class="playerScorebox">
+    <div class="gameplay flex flex-col bg-slate-500 justify-center items-center rounded-md w-4/5 h-screen">
+        <div class="scoreboard flex border-spacing-0 border rounded-md w-3/4">
+                <div class="playerScorebox flex border border-spacing-0 rounded-md basis-2/6 flex-1">
                     <p class="playerTitle">Player:</p>
                     <p class="playerPoints"></p>
                 </div>
-                <div class="infoBox">
+                <div class="infoBox flex border border-spacing-0 rounded-md basis-2/6 flex-1">
                     <div class="roundNumber">
 
                     </div>
                     <div class="roundsIcons">
-                        <div></div>
-                        <div></div>
+                        <div>O</div>
+                        <div>X</div>
                     </div>
                     <div class="roundResult">
                         <p class="resultText"></p>
                     </div>
                 </div>
-                <div class="computerScorebox">
+                <div class="computerScorebox flex border border-spacing-0 rounded-md basis-2/6 flex-1">
                     <p class="computerTitle">Computer:</p>
                     <p class="computerpoints"></p>
                 </div>
         </div>
-        <div class="buttons">
-
+        <div class="buttons flex">
+            <div><button class="rock">Rock</button></div>
+            <div><button class="paper">Paper</button></div>
+            <div><button class="scissors">Scissors</button></div>
         </div>
         <div class="newGameDiv">
             <button type="text" value="New Game" name="newGameButton" id="newGameButton">New Game</button>

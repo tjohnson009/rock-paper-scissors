@@ -1,15 +1,15 @@
-//create a startGame function
+//create a newGame function
 function newGame() {
     let playerScore = 0;
     let computerScore = 0;
     
-const DOM_INPUTS = {
+    const DOM_INPUTS = {
     startButton: document.querySelector('#startButton'), 
     roundsInput: document.querySelector('#numRounds'), 
-}
-// Event Listeners
-    // get input from user of how many rounds to play (max of 9)
-    let rounds = getNumOfRounds(); // returns a number
+        }
+    // Event Listeners
+        // get input from user of how many rounds to play (max of 9)
+    let rounds = 1; 
     DOM_INPUTS.startButton.addEventListener('click', (e) => {
         startPlay(rounds); 
     }); 
@@ -48,28 +48,11 @@ const DOM_INPUTS = {
     // }
 }
 
-function getNumOfRounds() {
-    let rounds = 1; 
-    // get the rounds input from the HTML element
-    // const roundsInput = document.querySelector('#numRounds'); 
-    // add event listener to rounds input on change
-    // roundsInput.addEventListener('change', (e) => {
-    //     rounds = e.target.value; 
-    //     // sets min number of rounds to 1 and upodates input
-    //     if (rounds < 1) {
-    //         console.info(`Minimum number of rounds is 1. Setting number of rounds to 1.`);
-    //         rounds = 1; 
-    //     }; 
-    //     // sets max number of rounds to 9 and updates input
-    //     if (rounds > 9) {
-    //         console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
-    //         rounds = 9; 
-    //     };  
-    //     roundsInput.value = rounds; 
-    //     console.log(`Rounds = ${rounds}`); 
-    // })
-    return rounds; 
-}; 
+// function getNumOfRounds() {
+//     let rounds = 1; 
+
+//     return rounds; 
+// }; 
 
 function updateScore(roundResult, playerScore, computerScore) { // (result = string, number, number)
     if (roundResult.includes('Player wins')) {
@@ -144,9 +127,15 @@ function playRound(rounds) { // returns a result string from the round
             console.log(rounds); 
             rounds++; 
             console.log(`Added one round to force a winner.`); 
-            console.log('Starting play now'); 
-            // roundsInput.value = rounds; 
+            // console.log('Starting play now'); 
         }
+
+        // hide the rounds container
+        const roundsDiv = document.querySelector('.roundsDivContainer'); 
+        roundsDiv.classList.toggle('hidden'); 
+        // display the gameplay container
+        const gameplayDiv = document.querySelector('.gameplay'); 
+        gameplayDiv.classList.toggle('hidden'); 
         console.log(rounds); 
 }
     
