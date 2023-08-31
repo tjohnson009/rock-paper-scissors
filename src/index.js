@@ -7,12 +7,27 @@ const DOM_INPUTS = {
     startButton: document.querySelector('#startButton'), 
     roundsInput: document.querySelector('#numRounds'), 
 }
-
+// Event Listeners
     // get input from user of how many rounds to play (max of 9)
     let rounds = getNumOfRounds(); // returns a number
     DOM_INPUTS.startButton.addEventListener('click', (e) => {
         startPlay(rounds); 
-    })
+    }); 
+    DOM_INPUTS.roundsInput.addEventListener('change', (e) => {
+        rounds = e.target.value; 
+        // sets min number of rounds to 1 and upodates input
+        if (rounds < 1) {
+            console.info(`Minimum number of rounds is 1. Setting number of rounds to 1.`);
+            rounds = 1; 
+        }; 
+        // sets max number of rounds to 9 and updates input
+        if (rounds > 9) {
+            console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
+            rounds = 9; 
+        };  
+        DOM_INPUTS.roundsInput.value = rounds; 
+        console.log(`Rounds = ${rounds}`); 
+    }); 
 
     // loop through playROund f(x) for the number of rounds
     // for (let i = 0; i < rounds; i++) { 
@@ -36,23 +51,23 @@ const DOM_INPUTS = {
 function getNumOfRounds() {
     let rounds = 1; 
     // get the rounds input from the HTML element
-    const roundsInput = document.querySelector('#numRounds'); 
+    // const roundsInput = document.querySelector('#numRounds'); 
     // add event listener to rounds input on change
-    roundsInput.addEventListener('change', (e) => {
-        rounds = e.target.value; 
-        // sets min number of rounds to 1 and upodates input
-        if (rounds < 1) {
-            console.info(`Minimum number of rounds is 1. Setting number of rounds to 1.`);
-            rounds = 1; 
-        }; 
-        // sets max number of rounds to 9 and updates input
-        if (rounds > 9) {
-            console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
-            rounds = 9; 
-        };  
-        roundsInput.value = rounds; 
-        console.log(rounds); 
-    })
+    // roundsInput.addEventListener('change', (e) => {
+    //     rounds = e.target.value; 
+    //     // sets min number of rounds to 1 and upodates input
+    //     if (rounds < 1) {
+    //         console.info(`Minimum number of rounds is 1. Setting number of rounds to 1.`);
+    //         rounds = 1; 
+    //     }; 
+    //     // sets max number of rounds to 9 and updates input
+    //     if (rounds > 9) {
+    //         console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
+    //         rounds = 9; 
+    //     };  
+    //     roundsInput.value = rounds; 
+    //     console.log(`Rounds = ${rounds}`); 
+    // })
     return rounds; 
 }; 
 
@@ -131,7 +146,8 @@ function playRound(rounds) { // returns a result string from the round
             console.log(`Added one round to force a winner.`); 
             console.log('Starting play now'); 
             // roundsInput.value = rounds; 
-    }
+        }
+        console.log(rounds); 
 }
     
     newGame();
