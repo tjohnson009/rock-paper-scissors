@@ -1,6 +1,6 @@
 //create a newGame function
 function newGame() {
-    let playerScore = 0;
+    let playerScore = 1;
     let computerScore = 0;
     
     const DOM_INPUTS = {
