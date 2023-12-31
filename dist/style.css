@@ -15,3 +15,11 @@ body {
   display: grid; 
   place-self: center center; 
 }
+
+.roundsDivContainer {
+  border: red 1px solid; 
+}
+
+.hidden {
+  display:none; 
+}

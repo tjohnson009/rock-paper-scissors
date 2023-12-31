@@ -6,15 +6,18 @@ function newGame() {
     const DOM_INPUTS = {
     startButton: document.querySelector('#startButton'), 
     roundsInput: document.querySelector('#numRounds'), 
+    roundNumberP: document.querySelector('.roundNumber p')
         }
     // Event Listeners
         // get input from user of how many rounds to play (max of 9)
-    let rounds = 1; 
+    // default to 3 rounds
+    let rounds = 3; 
+    //add event listener to the start button - upon click, gameplay starts
     DOM_INPUTS.startButton.addEventListener('click', (e) => {
         startPlay(rounds); 
     }); 
 
-    // get number opf rounds from user
+    // listen for number of rounds from user 
     DOM_INPUTS.roundsInput.addEventListener('change', (e) => {
         rounds = e.target.value; 
         // sets min number of rounds to 1 and upodates input
@@ -34,8 +37,9 @@ function newGame() {
 
     // loop through playROund f(x) for the number of rounds
     for (let i = 0; i < rounds; i++) { 
-        // announce the round #
+        // get the round # and display on UI
         // console.log(`Now starting Round ${i+1}.`); 
+        DOM_INPUTS.roundNumberP.innerText = `Round ${i+1} of ${rounds}`; 
 
         // plays one whole round of rock paper scissors
        let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
@@ -135,7 +139,7 @@ function playRound(rounds) { // returns a result string from the round
             // console.log('Starting play now'); 
         }
 
-        // hide the rounds container
+        // hide the rounds container on click
         const roundsDiv = document.querySelector('.roundsDivContainer'); 
         roundsDiv.classList.toggle('hidden'); 
         // display the gameplay container
