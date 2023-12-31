@@ -8,37 +8,38 @@ function newGame() {
     roundsInput: document.querySelector('#numRounds'), 
     roundNumberP: document.querySelector('.roundNumber p')
         }
-    // Event Listeners
-        // get input from user of how many rounds to play (max of 9)
-    // default to 3 rounds
-    let rounds = 3; 
-    //add event listener to the start button - upon click, gameplay starts
-    DOM_INPUTS.startButton.addEventListener('click', (e) => {
-        startPlay(rounds); 
-    }); 
+// Event Listeners
+// get input from user of how many rounds to play (max of 9)
+// default to 3 rounds
+    let rounds; 
 
-    // listen for number of rounds from user 
-    DOM_INPUTS.roundsInput.addEventListener('change', (e) => {
+//add event listener to the start button - upon click, gameplay starts
+    DOM_INPUTS.startButton.addEventListener('click', (e) => {
+            startPlay(rounds); 
+        }); 
+
+// listen for number of rounds from user 
+ DOM_INPUTS.roundsInput.addEventListener('change', (e) => { 
         rounds = e.target.value; 
-        // sets min number of rounds to 1 and upodates input
+// sets min number of rounds to 1 and upodates input
         if (rounds < 1) {
             console.info(`Minimum number of rounds is 1. Setting number of rounds to 1.`);
             rounds = 1; 
         }; 
-        // sets max number of rounds to 9 and updates input
+// sets max number of rounds to 9 and updates input
         if (rounds > 9) {
             console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
             rounds = 9; 
         };  
         DOM_INPUTS.roundsInput.value = rounds; 
-        return rounds; 
-        // console.log(`Rounds = ${rounds}`); 
+        return rounds;  
+// console.log(`Rounds = ${rounds}`); 
     }); 
 
+    // this needs to be a separate function because it will always be undefined at runtime
     // loop through playROund f(x) for the number of rounds
     for (let i = 0; i < rounds; i++) { 
         // get the round # and display on UI
-        // console.log(`Now starting Round ${i+1}.`); 
         DOM_INPUTS.roundNumberP.innerText = `Round ${i+1} of ${rounds}`; 
 
         // plays one whole round of rock paper scissors
@@ -136,7 +137,6 @@ function playRound(rounds) { // returns a result string from the round
             console.log(rounds); 
             rounds++; 
             console.log(`Added one round to force a winner.`); 
-            // console.log('Starting play now'); 
         }
 
         // hide the rounds container on click
