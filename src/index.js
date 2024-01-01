@@ -1,21 +1,24 @@
+const DOM_ELEMENTS = {
+    startButton: document.querySelector('#startButton'), 
+    roundsInput: document.querySelector('#numRounds'), 
+    roundNumberP: document.querySelector('.roundNumber p'), 
+    roundsDiv: document.querySelector('.roundsDivContainer'),
+    gameplayDiv: document.querySelector('.gameplay'), 
+    newGameButton: document.querySelector('#newGameButton')
+        }
 //create a newGame function
 function newGame() {
     let playerScore = 0;
     let computerScore = 0;
     
-    const DOM_INPUTS = {
-    startButton: document.querySelector('#startButton'), 
-    roundsInput: document.querySelector('#numRounds'), 
-    roundNumberP: document.querySelector('.roundNumber p')
-        }
 // Event Listeners
 // get input from user of how many rounds to play (max of 9)
 // default to 3 rounds
     let rounds = 3; 
 
 // listen for number of rounds from user 
- DOM_INPUTS.roundsInput.addEventListener('change', (e) => { 
-        rounds = e.target.value; 
+ DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => { 
+        rounds = e.target.value; //updates rounds variable to the value of the rounds input
 // sets min number of rounds to 1 and upodates input
         if (rounds < 1) {
             console.info(`Minimum number of rounds is 1. Setting number of rounds to 1.`);
@@ -26,20 +29,26 @@ function newGame() {
             console.info(`Max number of rounds is 9. Setting number of rounds to 9.`); 
             rounds = 9; 
         };  
-        DOM_INPUTS.roundsInput.value = rounds; // sets value of input to rounds
+        DOM_ELEMENTS.roundsInput.value = rounds; // sets value of input to the rounds variable if changed in above if statements
     }); 
 
 //add event listener to the start button - upon click, gameplay starts
-    DOM_INPUTS.startButton.addEventListener('click', (e) => {
+    DOM_ELEMENTS.startButton.addEventListener('click', (e) => {
         startPlay(rounds); 
     }); 
+
+    // add event listener to new game button for new game on click
+    DOM_ELEMENTS.newGameButton.addEventListener('click', (e) => {
+        newGame(); 
+        toggleGameplayDisplay(); 
+    })
 // return rounds; 
 
     // this needs to be a separate function because it will always be undefined at runtime
     // // loop through playRound f(x) for the number of rounds
     // for (let i = 0; i < rounds; i++) { 
     //     // get the round # and display on UI
-    //     DOM_INPUTS.roundNumberP.innerText = `Round ${i+1} of ${rounds}`; 
+    //     DOM_ELEMENTS.roundNumberP.innerText = `Round ${i+1} of ${rounds}`; 
 
     //     // plays one whole round of rock paper scissors
     //    let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
@@ -124,6 +133,14 @@ function playRound(rounds) { // returns a result string from the round
         }; 
     }
 
+    function toggleGameplayDisplay() {
+        // hide the rounds container on click
+        DOM_ELEMENTS.roundsDiv.classList.toggle('hidden'); 
+        // display the gameplay container 
+        DOM_ELEMENTS.gameplayDiv.classList.toggle('hidden'); 
+        // console.log(`${rounds} rounds`); 
+    }
+
     function startPlay(rounds) {
         // if rounds is even, increment by 1 to force a winner
         if (rounds % 2 == 0 && rounds < 9 && rounds > 1) {
@@ -131,14 +148,7 @@ function playRound(rounds) { // returns a result string from the round
             rounds++; 
             console.log(`Added one round to force a winner.`); 
         }
-
-    // hide the rounds container on click
-        const roundsDiv = document.querySelector('.roundsDivContainer'); 
-        roundsDiv.classList.toggle('hidden'); 
-    // display the gameplay container
-        const gameplayDiv = document.querySelector('.gameplay'); 
-        gameplayDiv.classList.toggle('hidden'); 
-        console.log(`${rounds} rounds`); 
+        toggleGameplayDisplay(); 
     }
 
     
