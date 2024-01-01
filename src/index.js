@@ -6,6 +6,7 @@ const DOM_ELEMENTS = {
     gameplayDiv: document.querySelector('.gameplay'), 
     newGameButton: document.querySelector('#newGameButton')
         }
+
 //create a newGame function
 function newGame() {
     let playerScore = 0;
@@ -17,7 +18,7 @@ function newGame() {
     let rounds = 3; 
 
 // listen for number of rounds from user 
- DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => { 
+DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => { 
         rounds = e.target.value; //updates rounds variable to the value of the rounds input
 // sets min number of rounds to 1 and upodates input
         if (rounds < 1) {
@@ -30,32 +31,20 @@ function newGame() {
             rounds = 9; 
         };  
         DOM_ELEMENTS.roundsInput.value = rounds; // sets value of input to the rounds variable if changed in above if statements
+        rounds = parseInt(DOM_ELEMENTS.roundsInput.value); 
     }); 
 
 //add event listener to the start button - upon click, gameplay starts
     DOM_ELEMENTS.startButton.addEventListener('click', (e) => {
-        startPlay(rounds); 
+        startPlay(rounds); // closure on rounds variable!! 
     }); 
 
-    // add event listener to new game button for new game on click
+// add event listener to new game button for new game on click
     DOM_ELEMENTS.newGameButton.addEventListener('click', (e) => {
         newGame(); 
-        toggleGameplayDisplay(); 
+        // toggleGameplayDisplay(); 
     })
-// return rounds; 
 
-    // this needs to be a separate function because it will always be undefined at runtime
-    // // loop through playRound f(x) for the number of rounds
-    // for (let i = 0; i < rounds; i++) { 
-    //     // get the round # and display on UI
-    //     DOM_ELEMENTS.roundNumberP.innerText = `Round ${i+1} of ${rounds}`; 
-
-    //     // plays one whole round of rock paper scissors
-    //    let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
-
-    //     //updates the score AND returns the values of the scores
-    //    [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
-    // }
     // announce winner of the whole game based on point values check
     // if (playerScore > computerScore) {
     //     console.log(`Player is the winner with a final score of ${playerScore} wins out of ${rounds} rounds!`);  
@@ -112,6 +101,7 @@ function playRound(rounds) { // returns a result string from the round
     function getPlayerChoice() { // returns a string of the users choice
         //prompt user for a choice
         // let input = prompt(`Rock, Paper or Scissors?`).toLowerCase(); 
+
         // set playerChoice or reprompt the user for a valid input
         return input == 'rock' ? 'rock' : 
         input == 'paper' ? 'paper' :
@@ -149,7 +139,16 @@ function playRound(rounds) { // returns a result string from the round
             console.log(`Added one round to force a winner.`); 
         }
         toggleGameplayDisplay(); 
+        for (let i = 0; i < rounds; i++) { 
+            // get the round # and display on UI
+            DOM_ELEMENTS.roundNumberP.innerText = `Round ${i+1} of ${rounds}`; 
+    
+            // plays one whole round of rock paper scissors
+           let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
+    
+            //updates the score AND returns the values of the scores
+           [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
+        }
     }
-
     
     newGame();
