@@ -10,16 +10,60 @@ body {
  background-color: #B2BEB5; 
 }
 
-
 .title {
-  display: grid; 
-  place-self: center center; 
+  width: 75%; 
+  margin: 0 auto;
+  text-align: center;
 }
 
 .roundsDivContainer {
-  border: red 1px solid; 
+  display: grid; 
+  grid-template: 1fr 1fr 1fr / 1fr; 
+  border: red solid 1px; 
+  margin: 0 auto; 
+}
+
+.roundsDivText {
+  margin: 0 auto; 
+}
+
+.roundsDivText p {
+
+}
+
+.roundsDivInput {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+
+.startButton {
+  margin: 0 auto; 
+  display: flex; 
+  align-items: center;;
+  vertical-align: middle;
+  justify-content: center; ;
+  width: 25%; 
+}
+
+#startButton {
+  width: 5rem; 
+}
+
+.roundsDivContainer * {
+  border: green 1px solid; 
 }
 
 .hidden {
-  display:none; 
+  display: none; 
+}
+
+.roundsDivContainer {
+  width: 65%;
+  /* display: grid;  */
+  align-self: center; 
+}
+
+.gameplay {
+  /* display: grid;  */
 }

@@ -4,16 +4,18 @@ const DOM_ELEMENTS = {
     roundNumberP: document.querySelector('.roundNumber p'), 
     roundsDiv: document.querySelector('.roundsDivContainer'),
     gameplayDiv: document.querySelector('.gameplay'), 
-    newGameButton: document.querySelector('#newGameButton')
+    newGameButton: document.querySelector('#newGameButton'), 
+    playerScore: document.querySelector('.playerPoints'), 
+    computerScore: document.querySelector('.computerPoints'),
+    choices: Array.from(document.querySelectorAll('.roundChoice')), 
         }
 
 //create a newGame function
 function newGame() {
-    let playerScore = 0;
-    let computerScore = 0;
+    // let playerScore = 0;
+    // let computerScore = 0;
     
 // Event Listeners
-// get input from user of how many rounds to play (max of 9)
 // default to 3 rounds
     let rounds = 3; 
 
@@ -45,6 +47,13 @@ DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => {
         // toggleGameplayDisplay(); 
     })
 
+// add event listeneres to buttons to fire the playRound function
+DOM_ELEMENTS.choices.forEach(el => {
+    el.addEventListener('click', (e) => {
+        playRound(e); 
+    })
+})
+
     // announce winner of the whole game based on point values check
     // if (playerScore > computerScore) {
     //     console.log(`Player is the winner with a final score of ${playerScore} wins out of ${rounds} rounds!`);  
@@ -75,51 +84,79 @@ function getComputerChoice() {
     return options[choice]; 
     }
 
-function playRound(rounds) { // returns a result string from the round
+
+
+
+function playRound(event) { 
+    // takes in the event when the 3 choices are clicked
     // get Player choice
-    let playerChoice = ''; 
-    let buttons = document.querySelectorAll('.roundChoice'); 
     // get computer choice 
 
-    let resultString = getRoundWinner(getPlayerChoice(), getComputerChoice()); // returns a string which will be used to determine the winner
+    let resultString = getRoundWinner(event.target.value, getComputerChoice()); // returns a string which will be used to determine the winner
     if (resultString.includes('tie')) { // result of round is a tie
-        return forceWinner(rounds); // calls playRound f(x)
-    } else {
-        console.log(resultString); // log result to the console
-        return resultString; // saved to a resault variable in the game function
+        // return forceWinner(); // calls playRound f(x)
+        // Tie handling
+         console.log(resultString); 
+        //  updateUI(resultString); 
+        // player wins handling
+    } else if (resultString.includes('Player')) {
+        console.log(resultString); 
+        updateUI(resultString); // saved to a resault variable in the game function
+        // computer wins handling
+    } else if (resultString.includes('Computer')) {
+        console.log(resultString); 
+        updateUI(resultString); 
+    }
+    }
+
+    function updateUI(result) {
+        if (result.includes('Player')) {
+            DOM_ELEMENTS.playerScore.innerHTML = parseInt(DOM_ELEMENTS.playerScore.innerHTML) + 1; 
+        } else if (result.includes('Computer')) {
+            DOM_ELEMENTS.computerScore.innerHTML = parseInt(DOM_ELEMENTS.computerScore.innerHTML) + 1;  
+        } else {
+
         }
     }
 
-    function forceWinner(rounds) { // receives the current round # from the game function and plays the round again
+
+
+    function forceWinner(roundNumber) { // receives the current round # from the game function and plays the round again
         console.log(`We must have a winner...`); 
         // resets round number for proper tracking
-        rounds = rounds - 1; 
+        roundNumber = roundNumber - 1; 
         //plays round again
-        return playRound(rounds); 
+        return playRound(roundNumber); 
     }; 
     
     function getPlayerChoice() { // returns a string of the users choice
+        // display "choose" prompt on UI
         //prompt user for a choice
-        // let input = prompt(`Rock, Paper or Scissors?`).toLowerCase(); 
+        // wait for user to click a button
+        // let input = 'rock'; 
 
         // set playerChoice or reprompt the user for a valid input
-        return input == 'rock' ? 'rock' : 
-        input == 'paper' ? 'paper' :
-        input == 'scissors' ? 'scissors' :
-        getPlayerChoice(); // call the function again to ensure that selection is valid
+        //  input == 'rock' ? 'rock' : 
+        // input == 'paper' ? 'paper' :
+        // input == 'scissors' ? 'scissors' :
+        // getPlayerChoice(); // call the function again to ensure that selection is valid
+
+        // setTimeout(() => {
+        //     console.log('Waiting for player response...'); 
+        // }, 5000); 
     }; 
     
-    function getRoundWinner(player, computer) { // returns a string
+    function getRoundWinner(playerChoice, computerChoice) { // returns a string
         // determine winner of the round
-        if (player === 'rock') {
+        if (playerChoice === 'rock') {
             console.log('Player chooses rock.'); 
-            return computer === 'rock' ? `It's a tie.` : computer === 'paper' ? `Computer wins! Paper beats rock.` : `Player wins! Rock beats scissors.`; 
-        } else if (player === 'paper') {
+            return computerChoice === 'rock' ? `It's a tie.` : computerChoice === 'paper' ? `Computer wins! Paper beats rock.` : `Player wins! Rock beats scissors.`; 
+        } else if (playerChoice === 'paper') {
             console.log('Player chooses paper.'); 
-            return computer === 'rock' ? `Player wins! Paper beats rock.` : computer === 'paper' ? `It's a tie.` : `Computer wins. Scissors beats paper.`; 
-        } else { // player must have chosen scissors by process of elimination
+            return computerChoice === 'rock' ? `Player wins! Paper beats rock.` : computerChoice === 'paper' ? `It's a tie.` : `Computer wins. Scissors beats paper.`; 
+        } else if (playerChoice === 'scissors') { 
             console.log('Player chooses scissors.');
-            return computer === 'rock' ? `Computer wins. Rock beats scissors.` : computer === 'paper' ? `Player wins! Scissors beats paper.` : `It's a tie.`;  
+            return computerChoice === 'rock' ? `Computer wins. Rock beats scissors.` : computerChoice === 'paper' ? `Player wins! Scissors beats paper.` : `It's a tie.`;  
         }; 
     }
 
@@ -139,16 +176,16 @@ function playRound(rounds) { // returns a result string from the round
             console.log(`Added one round to force a winner.`); 
         }
         toggleGameplayDisplay(); 
-        for (let i = 0; i < rounds; i++) { 
+        // for (let i = 0; i < rounds; i++) { 
             // get the round # and display on UI
-            DOM_ELEMENTS.roundNumberP.innerText = `Round ${i+1} of ${rounds}`; 
+            DOM_ELEMENTS.roundNumberP.innerText = `Round 1 of ${rounds}`; 
     
             // plays one whole round of rock paper scissors
-           let result = playRound(rounds); // returns string whiich will be used to determine winner and update scores
+        //    let result = playRound(roundNumber = i+1); // returns string whiich will be used to determine winner and update scores
     
             //updates the score AND returns the values of the scores
-           [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
-        }
+        //    [playerScore, computerScore] = updateScore(result, playerScore, computerScore); //crucial step of destructuring the values of the scores in order to update the score values
+        // }
     }
     
     newGame();
