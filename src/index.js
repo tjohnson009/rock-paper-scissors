@@ -8,6 +8,7 @@ const DOM_ELEMENTS = {
     playerScore: document.querySelector('.playerPoints'), 
     computerScore: document.querySelector('.computerPoints'),
     choices: Array.from(document.querySelectorAll('.roundChoice')), 
+    result: document.querySelector('.resultText')
         }; 
 
 let currentRound = 1; 
@@ -118,17 +119,31 @@ function playRound(event) {
     }
     }
 
+    function showResult(winner) { // updates UI to show result of the previous round
+        if (currentRound > rounds) {
+            if (parseInt(DOM_ELEMENTS.playerScore.innerHTML) > parseInt(DOM_ELEMENTS.computerScore.innerHTML)) {
+                DOM_ELEMENTS.result.innerHTML = `Player wins with a score of ${DOM_ELEMENTS.playerScore.innerHTML} to ${DOM_ELEMENTS.computerScore.innerHTML}`;
+            } else {
+                DOM_ELEMENTS.result.innerHTML = `Computer wins with a score of ${DOM_ELEMENTS.computerScore.innerHTML} to ${DOM_ELEMENTS.playerScore.innerHTML}`;
+            }
+        } else {
+            DOM_ELEMENTS.result.innerHTML = `${winner} wins Round ${currentRound - 1}`; 
+        }
+    }
+
     function updateUI(result) {
         // getRound(currentRound); 
-        console.log(currentRound); 
+        // console.log(currentRound); 
         //player wins
         if (result.includes('Player')) {
             DOM_ELEMENTS.playerScore.innerHTML = parseInt(DOM_ELEMENTS.playerScore.innerHTML) + 1; 
             DOM_ELEMENTS.roundNumberP.innerHTML = `Round ${currentRound} of ${rounds}`; 
+            showResult('Player'); // show previous round result before round number is updated
         //computer wins
         } else if (result.includes('Computer')) {
             DOM_ELEMENTS.computerScore.innerHTML = parseInt(DOM_ELEMENTS.computerScore.innerHTML) + 1;
             DOM_ELEMENTS.roundNumberP.innerHTML = `Round ${currentRound} of ${rounds}`; 
+            showResult('Computer'); 
         } else {
 
         }
