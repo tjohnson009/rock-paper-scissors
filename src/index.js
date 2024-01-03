@@ -8,7 +8,10 @@ const DOM_ELEMENTS = {
     playerScore: document.querySelector('.playerPoints'), 
     computerScore: document.querySelector('.computerPoints'),
     choices: Array.from(document.querySelectorAll('.roundChoice')), 
-        }
+        }; 
+
+let currentRound = 1; 
+let rounds = 3; 
 
 //create a newGame function
 function newGame() {
@@ -17,7 +20,7 @@ function newGame() {
     
 // Event Listeners
 // default to 3 rounds
-    let rounds = 3; 
+    // let rounds = 3; 
 
 // listen for number of rounds from user 
 DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => { 
@@ -90,8 +93,7 @@ function getComputerChoice() {
 function playRound(event) { 
     // takes in the event when the 3 choices are clicked
     // get Player choice
-    // get computer choice 
-
+    // get computer choice  
     let resultString = getRoundWinner(event.target.value, getComputerChoice()); // returns a string which will be used to determine the winner
     if (resultString.includes('tie')) { // result of round is a tie
         // return forceWinner(); // calls playRound f(x)
@@ -101,21 +103,31 @@ function playRound(event) {
         // player wins handling
     } else if (resultString.includes('Player')) {
         console.log(resultString); 
+        currentRound++; 
         updateUI(resultString); // saved to a resault variable in the game function
         // computer wins handling
     } else if (resultString.includes('Computer')) {
         console.log(resultString); 
+        currentRound++; 
         updateUI(resultString); 
     }
     }
 
     function updateUI(result) {
+        // getRound(currentRound); 
+        console.log(currentRound);
         if (result.includes('Player')) {
             DOM_ELEMENTS.playerScore.innerHTML = parseInt(DOM_ELEMENTS.playerScore.innerHTML) + 1; 
+            DOM_ELEMENTS.roundNumberP.innerHTML = `Round ${currentRound} of ${rounds}`; 
         } else if (result.includes('Computer')) {
-            DOM_ELEMENTS.computerScore.innerHTML = parseInt(DOM_ELEMENTS.computerScore.innerHTML) + 1;  
+            DOM_ELEMENTS.computerScore.innerHTML = parseInt(DOM_ELEMENTS.computerScore.innerHTML) + 1;
+            DOM_ELEMENTS.roundNumberP.innerHTML = `Round ${currentRound} of ${rounds}`; 
         } else {
 
+        }
+        // announces last round on the UI
+        if (currentRound === rounds || currentRound > rounds) {
+            DOM_ELEMENTS.roundNumberP.innerHTML = `Last round!`; 
         }
     }
 
@@ -178,8 +190,12 @@ function playRound(event) {
         toggleGameplayDisplay(); 
         // for (let i = 0; i < rounds; i++) { 
             // get the round # and display on UI
-            DOM_ELEMENTS.roundNumberP.innerText = `Round 1 of ${rounds}`; 
+            DOM_ELEMENTS.roundNumberP.innerText = `Round ${currentRound} of ${rounds}`; 
     
+        // return function getRound(currentRound) {
+        //      console.log(currentRound); 
+        //     return currentRound; 
+        // }
             // plays one whole round of rock paper scissors
         //    let result = playRound(roundNumber = i+1); // returns string whiich will be used to determine winner and update scores
     

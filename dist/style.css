@@ -19,7 +19,7 @@ body {
 .roundsDivContainer {
   display: grid; 
   grid-template: 1fr 1fr 1fr / 1fr; 
-  border: red solid 1px; 
+  /* border: red solid 1px;  */
   margin: 0 auto; 
 }
 
@@ -51,7 +51,7 @@ body {
 }
 
 .roundsDivContainer * {
-  border: green 1px solid; 
+  /* border: green 1px solid;  */
 }
 
 .hidden {
