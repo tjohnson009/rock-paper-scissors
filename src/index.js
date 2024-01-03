@@ -52,9 +52,7 @@ DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => {
 
 // add event listeneres to buttons to fire the playRound function
 DOM_ELEMENTS.choices.forEach(el => {
-    el.addEventListener('click', (e) => {
-        playRound(e); 
-    })
+    el.addEventListener('click', playRound)
 })
 
     // announce winner of the whole game based on point values check
@@ -73,7 +71,7 @@ function updateScore(roundResult, playerScore, computerScore) { // (result = str
     } else if (roundResult.includes('Computer wins')) {
         computerScore++;
         console.log(`Player: ${playerScore} - Computer: ${computerScore}`); 
-        return [playerScore, computerScore]; 
+        return [playerScore, computerScore]; // destructuring
     } // no else case because we force a winner
     }; 
 
@@ -104,21 +102,30 @@ function playRound(event) {
     } else if (resultString.includes('Player')) {
         console.log(resultString); 
         currentRound++; 
-        updateUI(resultString); // saved to a resault variable in the game function
+        updateUI(resultString); // saved to a result variable in the game function
         // computer wins handling
     } else if (resultString.includes('Computer')) {
         console.log(resultString); 
         currentRound++; 
         updateUI(resultString); 
     }
+
+    if (currentRound > rounds) {
+        // console.log('last round'); 
+        DOM_ELEMENTS.choices.forEach(el => {
+            el.removeEventListener('click', playRound); 
+        })
+    }
     }
 
     function updateUI(result) {
         // getRound(currentRound); 
-        console.log(currentRound);
+        console.log(currentRound); 
+        //player wins
         if (result.includes('Player')) {
             DOM_ELEMENTS.playerScore.innerHTML = parseInt(DOM_ELEMENTS.playerScore.innerHTML) + 1; 
             DOM_ELEMENTS.roundNumberP.innerHTML = `Round ${currentRound} of ${rounds}`; 
+        //computer wins
         } else if (result.includes('Computer')) {
             DOM_ELEMENTS.computerScore.innerHTML = parseInt(DOM_ELEMENTS.computerScore.innerHTML) + 1;
             DOM_ELEMENTS.roundNumberP.innerHTML = `Round ${currentRound} of ${rounds}`; 
