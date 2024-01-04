@@ -35,7 +35,7 @@ DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => {
         }; 
 // sets max number of rounds to 99 and updates input
         if (rounds > 99) {
-            console.info(`Max number of rounds is 99. Setting number of rounds to 9.`); 
+            console.info(`Max number of rounds is 99. Setting number of rounds to 99.`); 
             rounds = 99; 
         };  
         DOM_ELEMENTS.roundsInput.value = rounds; // sets value of input to the rounds variable if changed in above if statements
@@ -44,7 +44,7 @@ DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => {
 
 //add event listener to the start button - upon click, gameplay starts
     DOM_ELEMENTS.startButton.addEventListener('click', (e) => {
-        startPlay(rounds) // closure on rounds variable!! 
+        startPlay() // closure on rounds variable!! 
         toggleGameplayDisplay()
     }
     ); 
@@ -52,7 +52,7 @@ DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => {
 // add event listener to new game button for new game on click
     DOM_ELEMENTS.newGameButton.addEventListener('click', (e) => {
         newGame(); 
-        toggleGameplayDisplay(); // NOT SWITCHING because there are 2 event listeners?
+        toggleGameplayDisplay(); // NOT SWITCHING because there are 2 ELs?
     })
 
 // add event listeneres to buttons to fire the playRound function
@@ -87,19 +87,18 @@ function playRound(event) {
     // takes in the event when one of the 3 choices are clicked
     let resultString = getRoundWinner(event.target.value, getComputerChoice()); // returns a string which will be used to determine the winner
     if (resultString.includes('tie')) { // result of round is a tie
-        // return forceWinner(); // calls playRound f(x)
         // Tie handling
         //  console.log(resultString); 
          updateUI(resultString); 
         // player wins handling
     } else if (resultString.includes('Player')) {
         // console.log(resultString); 
-        currentRound++; 
+        currentRound +=1; 
         updateUI(resultString); // saved to a result variable in the game function
         // computer wins handling
     } else if (resultString.includes('Computer')) {
         // console.log(resultString); 
-        currentRound++; 
+        currentRound +=1; 
         updateUI(resultString); 
     }
 
@@ -177,11 +176,11 @@ function playRound(event) {
         // console.log(`${rounds} rounds`); 
     }
 
-    function startPlay(rounds) {
+    function startPlay() {
         // if rounds is even, increment by 1 to force a winner
         if (rounds % 2 == 0 && rounds < 99 && rounds > 1) {
             console.log(rounds); 
-            rounds++; 
+            rounds = rounds + 1; 
             console.log(`Added one round to force a winner.`); 
         }
         // toggleGameplayDisplay(); 
