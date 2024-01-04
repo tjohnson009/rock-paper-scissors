@@ -14,6 +14,16 @@ const DOM_ELEMENTS = {
 let currentRound = 1; 
 let rounds = 3; 
 
+function initializeStartButton() {
+    startPlay();
+    toggleGameplayDisplay(); 
+}
+
+function initializeNewGameButton() {
+    newGame();
+    toggleGameplayDisplay(); 
+}
+
 //create a newGame function
 function newGame() {
 // reset scores
@@ -21,10 +31,9 @@ DOM_ELEMENTS.playerScore.innerHTML = 0;
 DOM_ELEMENTS.computerScore.innerHTML = 0; 
 currentRound = 1; 
 
-//remove previous event listeners to avoid duplicates
-    
-// Event Listeners
+DOM_ELEMENTS.result.innerHTML = `Rock, Paper, or Scissors?`
 
+// Event Listeners
 // listen for number of rounds from user 
 DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => { 
         rounds = e.target.value; //updates rounds variable to the value of the rounds input
@@ -43,17 +52,11 @@ DOM_ELEMENTS.roundsInput.addEventListener('change', (e) => {
     }); 
 
 //add event listener to the start button - upon click, gameplay starts
-    DOM_ELEMENTS.startButton.addEventListener('click', (e) => {
-        startPlay() // closure on rounds variable!! 
-        toggleGameplayDisplay()
-    }
-    ); 
+    DOM_ELEMENTS.startButton.addEventListener('click', initializeStartButton); 
 
 // add event listener to new game button for new game on click
-    DOM_ELEMENTS.newGameButton.addEventListener('click', (e) => {
-        newGame(); 
-        toggleGameplayDisplay(); // NOT SWITCHING because there are 2 ELs?
-    })
+    DOM_ELEMENTS.newGameButton.addEventListener('click', initializeNewGameButton); 
+    // NOT SWITCHING because there are 2 ELs?
 
 // add event listeneres to buttons to fire the playRound function
 DOM_ELEMENTS.choices.forEach(el => {
