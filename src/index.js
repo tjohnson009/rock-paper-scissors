@@ -133,12 +133,12 @@ function playRound(event) {
         //player wins - update UI
         if (result.includes('Player')) {
             DOM_ELEMENTS.playerScore.innerHTML = parseInt(DOM_ELEMENTS.playerScore.innerHTML) + 1; 
-            DOM_ELEMENTS.roundNumberP.innerHTML = `Round ${currentRound} of ${rounds}`; 
+            DOM_ELEMENTS.roundNumberP.innerHTML = `Round <p>${currentRound} of ${rounds}</p>`; 
             showResult('Player'); // show previous round result before round number is updated
         //computer wins - update UI
         } else if (result.includes('Computer')) {
             DOM_ELEMENTS.computerScore.innerHTML = parseInt(DOM_ELEMENTS.computerScore.innerHTML) + 1;
-            DOM_ELEMENTS.roundNumberP.innerHTML = `Round ${currentRound} of ${rounds}`; 
+            DOM_ELEMENTS.roundNumberP.innerHTML = `Round <p>${currentRound} of ${rounds}</p>`; 
             showResult('Computer'); 
         } else { // tie round - update UI
             showResult('tie'); 
@@ -184,11 +184,12 @@ function playRound(event) {
         if (rounds % 2 == 0 && rounds < 99 && rounds > 1) {
             console.log(rounds); 
             rounds = rounds + 1; 
-            console.log(`Added one round to force a winner.`); 
+            // console.log(`Added one round to force a winner.`); 
+            DOM_ELEMENTS.result.innerText = `Updated to ${rounds} rounds to have a tie breaker`
         }
         // toggleGameplayDisplay(); 
             // get the round # and display on UI
-            DOM_ELEMENTS.roundNumberP.innerText = `Round ${currentRound} of ${rounds}`; 
+            DOM_ELEMENTS.roundNumberP.innerHTML = `Round <p>${currentRound} of ${rounds}</p>`; 
     }
     
     newGame();
