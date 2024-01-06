@@ -1,4 +1,15 @@
 
+:root {
+  --level1: solid 1px red; 
+  --level2: solid 1px orange; 
+  --level3: solid 1px yellow;
+  --level4: solid 1px green; 
+  --level5: solid 1px blue; 
+  --level6: solid 1px indigo; 
+  --level7: solid 1px black;
+  --level8: solid 1px white;  
+}
+
 html {
   box-sizing: border-box;
 }
@@ -7,7 +18,7 @@ html {
 }
 
 body {
- background-color: #B2BEB5; 
+ background-color: #b2b2b2; 
 }
 
 .title {
@@ -21,6 +32,8 @@ body {
   grid-template: 1fr 1fr 1fr / 1fr; 
   /* border: red solid 1px;  */
   margin: 0 auto; 
+  width: 65%;
+  align-self: center; 
 }
 
 .roundsDivText {
@@ -50,20 +63,81 @@ body {
   width: 5rem; 
 }
 
-.roundsDivContainer * {
-  /* border: green 1px solid;  */
+.gameplay {
+  width: 65%; 
+  margin: 0 auto; 
+  border: var(--level1);   
+  height: 75vh;
+  display: grid; 
+  grid-template-rows: 1fr .5fr .25fr;
+  grid-template-columns: 1fr;  
+}
+
+.scoreboard {
+border:var(--level2); 
+display: grid;  
+/* justify-items: center;  */
+}
+
+.scoreboardTop {
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);  
+  grid-template-rows: 1fr; 
+}
+
+.scoreboardTop > div {
+  border:var(--level4); 
+  width: 100%;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.infoBox {
+
+}
+
+.roundResult {
+ border: var(--level3); 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+}
+
+.roundResult p {
+  font-size: 2rem;
+}
+
+.roundResult > div {
+  display: grid; 
+  align-items: center; 
+  border: var(--level4); 
+  text-align: center; 
+}
+
+.buttons {
+  border: var(--level2); 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  justify-items: center;
+  align-items: center; ;
+}
+
+.buttons button {
+  width: 9rem; 
+  height: 3rem; 
+  color: black; 
+  background-color: seagreen;
+  border-radius: 25px; ;
+}
+
+.newGameDiv {
+  border: var(--level2); 
+  text-align: center;
+  /* background-color: purple; */
+  /* vertical-align: middle; */
+  /* margin: 0 auto */
+  /* align-self: center; */
 }
 
 .hidden {
   display: none; 
-}
-
-.roundsDivContainer {
-  width: 65%;
-  /* display: grid;  */
-  align-self: center; 
-}
-
-.gameplay {
-  /* display: grid;  */
 }
