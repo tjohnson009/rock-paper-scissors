@@ -8,7 +8,9 @@ const DOM_ELEMENTS = {
     playerScore: document.querySelector('.playerPoints'), 
     computerScore: document.querySelector('.computerPoints'),
     choices: Array.from(document.querySelectorAll('.roundChoice')), 
-    result: document.querySelector('.resultText')
+    result: document.querySelector('.resultText'), 
+    playerIcon: document.querySelector('.playerIcon'), 
+    computerIcon: document.querySelector('.computerIcon')
         }; 
 
 let currentRound = 1; 
@@ -30,6 +32,10 @@ function newGame() {
 DOM_ELEMENTS.playerScore.innerHTML = 0; 
 DOM_ELEMENTS.computerScore.innerHTML = 0; 
 currentRound = 1; 
+
+// reset Icons
+DOM_ELEMENTS.playerIcon.innerHTML = ''; 
+DOM_ELEMENTS.computerIcon.innerHTML = ''; 
 
 DOM_ELEMENTS.result.innerHTML = `Rock, Paper, or Scissors?`
 
@@ -86,22 +92,58 @@ function getComputerChoice() {
     return options[choice]; 
     }
 
+function updateIcons(playerIcon, computerIcon) {
+    // console.log(pChoice, cChoice); 
+
+    
+        switch (playerIcon) {
+            case 'rock':
+                DOM_ELEMENTS.playerIcon.innerHTML = '&#129704;'
+              break;
+            case 'paper':
+                DOM_ELEMENTS.playerIcon.innerHTML = "&#128196; "
+                break; 
+            case 'scissors':
+                DOM_ELEMENTS.playerIcon.innerHTML = "&#9996;"
+              break;
+            default: ''; 
+          }
+
+      switch (computerIcon) {
+        case 'rock':
+            DOM_ELEMENTS.computerIcon.innerHTML = '&#129704;'
+          break;
+        case 'paper':
+            DOM_ELEMENTS.computerIcon.innerHTML = "&#128196;"
+            break; 
+        case 'scissors':
+          DOM_ELEMENTS.computerIcon.innerHTML = "&#9996;"
+          break;
+        default: ''; 
+      }
+}
+
 function playRound(event) { 
+
+    let computerChoice = getComputerChoice(); 
     // takes in the event when one of the 3 choices are clicked
-    let resultString = getRoundWinner(event.target.value, getComputerChoice()); // returns a string which will be used to determine the winner
+    let resultString = getRoundWinner(event.target.value, computerChoice); // returns a string which will be used to determine the winner
     if (resultString.includes('tie')) { // result of round is a tie
         // Tie handling
         //  console.log(resultString); 
+         updateIcons(event.target.value, computerChoice); 
          updateUI(resultString); 
         // player wins handling
     } else if (resultString.includes('Player')) {
         // console.log(resultString); 
         currentRound +=1; 
+        updateIcons(event.target.value, computerChoice); 
         updateUI(resultString); // saved to a result variable in the game function
         // computer wins handling
     } else if (resultString.includes('Computer')) {
         // console.log(resultString); 
         currentRound +=1; 
+        updateIcons(event.target.value, computerChoice); 
         updateUI(resultString); 
     }
 
@@ -130,6 +172,9 @@ function playRound(event) {
     }
 
     function updateUI(result) {
+        // show player and computer choices - Icons
+
+
         //player wins - update UI
         if (result.includes('Player')) {
             DOM_ELEMENTS.playerScore.innerHTML = parseInt(DOM_ELEMENTS.playerScore.innerHTML) + 1; 
