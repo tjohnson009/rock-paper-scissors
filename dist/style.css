@@ -10,6 +10,17 @@
   --level8: solid 1px white;  
 }
 
+button {
+  border: 0; 
+  padding: 0; 
+  margin: 0; 
+}
+
+button:hover {
+  cursor: pointer; 
+  border: 1px solid black; 
+}
+
 html {
   box-sizing: border-box;
 }
@@ -28,9 +39,9 @@ body {
 }
 
 .roundsDivContainer {
+  /* border: var(--level1);  */
   display: grid; 
   grid-template: 1fr 1fr 1fr / 1fr; 
-  /* border: red solid 1px;  */
   margin: 0 auto; 
   width: 65%;
   align-self: center; 
@@ -38,6 +49,7 @@ body {
 
 .roundsDivText {
   margin: 0 auto; 
+  font-size: 1.5rem;
 }
 
 .roundsDivText p {
@@ -64,9 +76,9 @@ body {
 }
 
 .gameplay {
+  /* border: var(--level1);    */
   width: 65%; 
   margin: 0 auto; 
-  border: var(--level1);   
   height: 75vh;
   display: grid; 
   grid-template-rows: 1fr .5fr .25fr;
@@ -74,9 +86,8 @@ body {
 }
 
 .scoreboard {
-border:var(--level2); 
+/* border:var(--level2);  */
 display: grid;  
-/* justify-items: center;  */
 }
 
 .scoreboardTop {
@@ -86,7 +97,7 @@ display: grid;
 }
 
 .scoreboardTop > div {
-  border:var(--level4); 
+  /* border:var(--level4);  */
   width: 100%;
   font-size: 2.5rem;
   text-align: center;
@@ -97,7 +108,7 @@ display: grid;
 }
 
 .roundResult {
- border: var(--level3); 
+ /* border: var(--level3);  */
   display: grid; 
   grid-template-columns: repeat(3, 1fr); 
 }
@@ -107,14 +118,14 @@ display: grid;
 }
 
 .roundResult > div {
+  /* border: var(--level4);  */
   display: grid; 
   align-items: center; 
-  border: var(--level4); 
   text-align: center; 
 }
 
 .buttons {
-  border: var(--level2); 
+  /* border: var(--level2);  */
   display: grid; 
   grid-template-columns: repeat(3, 1fr); 
   justify-items: center;
@@ -126,16 +137,28 @@ display: grid;
   height: 3rem; 
   color: black; 
   background-color: seagreen;
-  border-radius: 25px; ;
+  border-radius: 25px;
 }
 
 .newGameDiv {
-  border: var(--level2); 
+  /* border: var(--level2);  */
   text-align: center;
   /* background-color: purple; */
   /* vertical-align: middle; */
   /* margin: 0 auto */
   /* align-self: center; */
+}
+
+.newGameDiv button, #startButton {
+  width: 9rem; 
+  height: 3rem; 
+  color: black; 
+  background-color: cornflowerblue;
+  border-radius: 25px;
+}
+
+.playerIcon, .computerIcon {
+  font-size: 7rem; 
 }
 
 .hidden {
