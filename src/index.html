@@ -23,33 +23,33 @@
     </div>
     <div class="gameplay hidden">
         <div class="scoreboard">
+            <div class="scoreboardTop" id="scoreboardTop">
                 <div class="playerScorebox">
-                    <p class="playerTitle">Player:</p>
+                    <p class="playerTitle">Player</p>
                     <p class="playerPoints">0</p>
                 </div>
                 <div class="infoBox">
                     <div class="roundNumber">
-                        <p>Round: </p>
-                    </div>
-                    <!-- <div class="roundsIcons">
-                        <div>O</div>
-                        <div>X</div>
-                    </div> -->
-                    <div class="roundResult">
-                        <p class="resultText">Rock, Paper or Scissors?</p>
+                        <p>Round</p>
                     </div>
                 </div>
                 <div class="computerScorebox">
-                    <p class="computerTitle">Computer:</p>
+                    <p class="computerTitle">Computer</p>
                     <p class="computerPoints">0</p>
                 </div>
+            </div>
+            <div class="roundResult" id="roundResult">
+                <div class="playerIcon">O</div>
+                <div><p class="resultText">Rock, Paper or Scissors?</p></div>
+                    <div class="computerIcon">X</div>
+            </div>
         </div>
-        <div class="buttons">
+        <div class="buttons" id="buttons">
             <div><button class="rock roundChoice" value="rock">Rock</button></div>
             <div><button class="paper roundChoice" value="paper">Paper</button></div>
             <div><button class="scissors roundChoice" value="scissors">Scissors</button></div>
         </div>
-        <div class="newGameDiv">
+        <div class="newGameDiv" id="newGameDiv">
             <button type="text" value="New Game" name="newGameButton" id="newGameButton">New Game</button>
         </div>
     </div>
