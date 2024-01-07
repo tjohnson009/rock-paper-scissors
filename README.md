@@ -1,5 +1,5 @@
 # rock-paper-scissors
-A classic Rock Paper Scissors game in the console (for the time being)! Looking forward to adding a UI eventually. 
+A classic Rock Paper Scissors game in the browser!
 
 Here are some things I learned and utlized in this project:
 
